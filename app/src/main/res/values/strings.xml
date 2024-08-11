@@ -221,4 +221,14 @@
         </ul>
         ]]>
     </string>
+
+    <!-- FAQ Page Content -->
+    <string name="back_button">Back</string>
+    <string name="app_logo">App Logo</string>
+    <string name="faq_page">FAQ</string>
+    <string name="faq_question_1">What is this app for?</string>
+    <string name="faq_answer_1">This app is designed to detect and prevent smishing attacks.</string>
+    <string name="faq_question_2">How does it work?</string>
+    <string name="faq_answer_2">The app analyzes incoming SMS messages for potential threats using advanced algorithms.</string>
+
 </resources>

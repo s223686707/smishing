@@ -65,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
         //Help button to switch to Help page
         Button helpBtn = findViewById(R.id.helpBtn);
         helpBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, HelpActivity.class));
+            startActivity(new Intent(this, FAQActivity.class));
             finish();
         });
     }
