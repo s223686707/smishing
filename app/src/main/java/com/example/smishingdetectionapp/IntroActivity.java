@@ -1,6 +1,7 @@
 package com.example.smishingdetectionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,17 +22,23 @@ public class IntroActivity extends AppCompatActivity {
     private Button skipButton;
     private Button nextButton;
     private IntroSliderAdapter adapter;
-    private DotsIndicator dotsIndicator; // Add this line
+    private DotsIndicator dotsIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!isFirstRun()) {
+            startMainActivity();
+            return;
+        }
+
         setContentView(R.layout.activity_intro);
 
         viewPager = findViewById(R.id.viewPager);
         skipButton = findViewById(R.id.skipButton);
         nextButton = findViewById(R.id.nextButton);
-        dotsIndicator = findViewById(R.id.dotsIndicator); // Initialize DotsIndicator
+        dotsIndicator = findViewById(R.id.dotsIndicator);
 
         List<IntroSlide> slides = new ArrayList<>();
         slides.add(new IntroSlide(R.drawable.img_1, "Solution for detecting and eliminating spam!", "Protect your inbox from unwanted and harmful messages with our advanced spam detection technology."));
@@ -40,7 +47,7 @@ public class IntroActivity extends AppCompatActivity {
 
         adapter = new IntroSliderAdapter(this, slides);
         viewPager.setAdapter(adapter);
-        dotsIndicator.setViewPager2(viewPager); // Connect ViewPager2 with DotsIndicator
+        dotsIndicator.setViewPager2(viewPager);
 
         skipButton.setOnClickListener(v -> finishIntroSlider());
 
@@ -65,8 +72,24 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
+    private boolean isFirstRun() {
+        SharedPreferences prefs = getSharedPreferences("IntroPrefs", MODE_PRIVATE);
+        return prefs.getBoolean("isFirstRun", true);
+    }
+
+    private void setFirstRunComplete() {
+        SharedPreferences prefs = getSharedPreferences("IntroPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("isFirstRun", false);
+        editor.apply();
+    }
+
     private void finishIntroSlider() {
-        // Start your main app activity
+        setFirstRunComplete();
+        startMainActivity();
+    }
+
+    private void startMainActivity() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }

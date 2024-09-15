@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,7 +51,6 @@ public class IntroSliderAdapter extends RecyclerView.Adapter<IntroSliderAdapter.
             imageView = itemView.findViewById(R.id.introImage);
             titleTextView = itemView.findViewById(R.id.introTitle);
             descriptionTextView = itemView.findViewById(R.id.introDescription);
-
         }
 
         void bind(IntroSlide slide) {
